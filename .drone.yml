@@ -1,0 +1,42 @@
+pipeline:
+  build_dry_run:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: publicintegrity/fcc-files-loader
+    cache_from: "publicintegrity/fcc-files-loader:latest"
+    tags:
+      - ${DRONE_COMMIT_SHA:0:12}
+      - latest
+    dry_run: true
+    when:
+      event: [push, tag]
+
+  build_push:
+    image: plugins/docker
+    secrets: [ docker_username, docker_password ]
+    repo: publicintegrity/fcc-files-loader
+    cache_from: "publicintegrity/fcc-files-loader:latest"
+    tags:
+      - ${DRONE_COMMIT_SHA:0:12}
+      - latest
+    when:
+      event: deployment
+      environment: production
+
+  pipeline_update:
+    image: "publicintegrity/pachctl:554b1a5ddfe3"
+    environment:
+      - PACHD_ADDRESS=pachd-api-grpc.pachyderm.svc.cluster.local:30650
+      - IMAGE_NAME=publicintegrity/fcc-files-loader
+      - IMAGE_TAG=${DRONE_COMMIT_SHA:0:12}
+    commands:
+      - for file in $(find ./pipelines -name "*.yml" | sort); do yq write -d'*' $file transform.image "$${IMAGE_NAME}:$${IMAGE_TAG}" | yq read -j -; done | pachctl update pipeline
+    when:
+      event: deployment
+      environment: production
+
+  slack:
+    image: plugins/slack
+    secrets: [ slack_webhook ]
+    when:
+      status: [ success, failure ]

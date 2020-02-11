@@ -1,0 +1,16 @@
+---
+pipeline:
+  name: fcc-files-list
+transform:
+  image: publicintegrity/fcc-files-loader
+  cmd:
+  - bash
+  stdin:
+  - ./transforms/list.sh /pfs/out/
+parallelism_spec:
+  constant: 1
+input:
+  cron:
+    name: tick
+    spec: "0 8 * * *"
+    overwrite: true
