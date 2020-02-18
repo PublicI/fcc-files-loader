@@ -6,11 +6,11 @@ transform:
   cmd:
   - bash
   stdin:
-  - ./transforms/list.sh /pfs/out/
+  - ./transforms/files.sh /pfs/facilities/ /pfs/out/
 parallelism_spec:
   constant: 1
 input:
-  cron:
-    name: tick
-    spec: "0 8 * * *"
-    overwrite: true
+  pfs:
+    name: facilities
+    repo: fcc-files-facilities-list
+    glob: /*

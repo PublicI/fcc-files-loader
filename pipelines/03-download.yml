@@ -1,0 +1,16 @@
+---
+pipeline:
+  name: fcc-files-download
+transform:
+  image: publicintegrity/fcc-files-loader
+  cmd:
+  - bash
+  stdin:
+  - ./transforms/download.sh /pfs/files/ /pfs/out/
+parallelism_spec:
+  constant: 2
+input:
+  pfs:
+    name: files
+    repo: fcc-files-list
+    glob: /*
