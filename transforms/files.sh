@@ -13,7 +13,7 @@ for file in $1*.json; do
         if [ "$id" != "" ]; then
 	        path=$(echo $file | jq -r '.file_folder_path')
 	        year=(${path//\// })
-        	if [ "${year[2]}" = "2018" ] || [ "${year[2]}" = "2019" ] || [ "${year[2]}" = "2020" ]; then
+        	if [ "${year[2]}" = "2019" ] || [ "${year[2]}" = "2020" ]; then # [ "${year[2]}" = "2018" ] || 
         		echo $file > $2$id'.json'
         	fi
     	fi
