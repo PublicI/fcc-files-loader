@@ -10,7 +10,7 @@ for type in tv am fm; do
 
     while IFS= read -r facility; do
         id=$(echo $facility | jq -r '.id')
-        echo $facility > $1'/'$id'.json'
+        echo $facility > $1$id'.json'
     done <<< "$facilities"
 done
 
@@ -19,5 +19,5 @@ facilities=$(echo $response | jq -r -c '.results.globalSearchResults.cableSystem
 
 while IFS= read -r facility; do
     id=$(echo $facility | jq -r '.psid')
-    echo $facility > $1'/'$id'.json'
+    echo $facility > $1$id'.json'
 done <<< "$facilities"
