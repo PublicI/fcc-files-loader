@@ -4,7 +4,6 @@ set -euo pipefail
 
 response=$(curl -s "https://publicfiles.fcc.gov/api/service/facility/search/*.json")
 
-facilities
 for type in tv am fm; do
     facilities=$(echo $response | jq -r -c '.results.globalSearchResults.'$type'FacilityList[]')
 
