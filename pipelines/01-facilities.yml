@@ -12,5 +12,5 @@ parallelism_spec:
 input:
   cron:
     name: tick
-    spec: "45 22 * * 3"
+    spec: "55 22 * * 3"
     overwrite: true
