@@ -9,8 +9,3 @@ transform:
   - ./transforms/facilities.sh /pfs/out/
 parallelism_spec:
   constant: 1
-input:
-  cron:
-    name: tick
-    spec: "0 8 * * *"
-    overwrite: true

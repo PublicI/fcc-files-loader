@@ -4,11 +4,13 @@ set -euo pipefail
 
 for file in $1*.json; do
     id=$(basename $file .json)
+    facility=$(cat $file | jq -c)
     echo $id
     response=$(curl -s "https://publicfiles.fcc.gov/api/manager/search/key/Political.json?entityId="$id)
     files=$(echo $response | jq -r -c '.searchResult.files[]')
 
     while IFS= read -r file; do
+        file=$(echo $file | jq --argjson facility "$facility" '. * {facility: $facility}')
         id=$(echo $file | jq -r '.file_manager_id')
         if [ "$id" != "" ]; then
 	        path=$(echo $file | jq -r '.file_folder_path')
@@ -18,6 +20,4 @@ for file in $1*.json; do
         	fi
     	fi
     done <<< "$files"
-
-    sleep 2
 done
