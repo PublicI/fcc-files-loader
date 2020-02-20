@@ -9,6 +9,8 @@ transform:
   - ./transforms/files.sh /pfs/facilities/ /pfs/out/
 parallelism_spec:
   constant: 3
+chunk_spec:
+  number: 1
 input:
   pfs:
     name: facilities
