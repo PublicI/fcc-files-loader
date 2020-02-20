@@ -9,6 +9,8 @@ transform:
   - ./transforms/facilities.sh /pfs/out/
 parallelism_spec:
   constant: 1
+chunk_spec:
+  number: 1
 input:
   cron:
     name: tick
