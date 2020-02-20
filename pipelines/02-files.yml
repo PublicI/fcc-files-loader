@@ -8,7 +8,7 @@ transform:
   stdin:
   - ./transforms/files.sh /pfs/facilities/ /pfs/out/
 parallelism_spec:
-  constant: 1
+  constant: 3
 input:
   pfs:
     name: facilities
