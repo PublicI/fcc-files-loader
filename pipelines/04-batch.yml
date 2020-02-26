@@ -13,8 +13,6 @@ egress:
   URL: "s3://cpi-docs/fcc-files-loader"
 chunk_spec:
   number: 19995
-egress:
-  URL: "s3://cpi-docs/fcc-files-loader"
 input:
   pfs:
     name: download
