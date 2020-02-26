@@ -6,7 +6,7 @@ transform:
   cmd:
   - bash
   stdin:
-  - ./transforms/facilities.sh /pfs/out/
+  - ./transforms/facilities.sh /pfs/out
 parallelism_spec:
   constant: 1
 spout:
