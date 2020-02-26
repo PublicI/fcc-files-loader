@@ -6,7 +6,7 @@ transform:
   cmd:
   - bash
   stdin:
-  - ./transforms/batch.sh /pfs/files /pfs/out/
+  - ./transforms/batch.sh /pfs/download /pfs/out/
 parallelism_spec:
   constant: 1
 egress:
