@@ -1,0 +1,22 @@
+---
+pipeline:
+  name: fcc-files-batch
+transform:
+  image: publicintegrity/fcc-files-loader
+  cmd:
+  - bash
+  stdin:
+  - ./transforms/batch.sh /pfs/files /pfs/out/
+parallelism_spec:
+  constant: 1
+egress:
+  URL: "s3://cpi-docs/fcc-files-loader"
+chunk_spec:
+  number: 19995
+egress:
+  URL: "s3://cpi-docs/fcc-files-loader"
+input:
+  pfs:
+    name: download
+    repo: fcc-files-download
+    glob: /*

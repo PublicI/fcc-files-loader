@@ -9,10 +9,6 @@ transform:
   - ./transforms/download.sh /pfs/files/ /pfs/out/
 parallelism_spec:
   constant: 3
-egress:
-  URL: "s3://cpi-docs/fcc-files-loader"
-chunk_spec:
-  number: 1
 input:
   pfs:
     name: files
